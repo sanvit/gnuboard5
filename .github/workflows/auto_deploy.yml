@@ -12,5 +12,6 @@ jobs:
     steps:
       - name: connect to ssh and git pull
         run: |
+          mkdir -p ~/.ssh/
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           ssh -q ${{ secrets.USERNAME }}@${{ secrets.SERVER_IP }} 'cd ${{ secrets.FILE_PATH }} && git pull'
