@@ -15,4 +15,4 @@ jobs:
           mkdir -p ~/.ssh/
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 400 ~/.ssh/id_rsa
-          ssh -o "StrictHostKeyChecking=no" -q -v ${{ secrets.USERNAME }}@${{ secrets.SERVER_IP }} 'cd ${{ secrets.FILE_PATH }} && git pull'
+          ssh -o "StrictHostKeyChecking=no" -q -v ${{ secrets.USERNAME }}@${{ secrets.SERVER_IP }} 'sudo -i && cd ${{ secrets.FILE_PATH }} && git pull'
