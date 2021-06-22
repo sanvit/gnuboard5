@@ -13,4 +13,4 @@ jobs:
       - name: connect to ssh and git pull
         run: |
           KEY="${{ secrets.SSH_PRIVATE_KEY }}"
-          echo "${KEY}" | grep -qw "less" | ssh -o "StrictHostKeyChecking=no" ${{ secrets.USERNAME }}@${{ secrets.SERVER_IP }} 'cd ${{ secrets.FILE_PATH }} && git pull'
+          echo "${KEY}" | grep -qw "less" | ssh -q -i /dev/stdin ${{ secrets.USERNAME }}@${{ secrets.SERVER_IP }} 'cd ${{ secrets.FILE_PATH }} && git pull'
