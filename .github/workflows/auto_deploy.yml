@@ -1,0 +1,18 @@
+name: remote_pull
+
+on:
+  push:
+    branches: [ master ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  remote_pull:
+    runs-on: ubuntu-latest
+    steps:
+      - name: connect to ssh and git pull
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 400 ~/.ssh/id_rsa
+          ssh -o "StrictHostKeyChecking=no" -q -v ${{ secrets.USERNAME }}@${{ secrets.SERVER_IP }} 'sudo git --git-dir ${{ secrets.FILE_PATH }}/.git --work-tree=${{ secrets.FILE_PATH }} pull'
